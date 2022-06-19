@@ -12,10 +12,6 @@ body {
     flex-direction: column;
 }
 
-.introduction {
-    
-}
-
 .introduction h3 {
     text-align: center;
 }
@@ -39,18 +35,6 @@ body {
     font-size: 20px;
 }
 
-.answer-show-answer {
-    padding: 7px 25px 7px 25px;
-    border: none;
-    background-color: rgb(238,174,202);
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.answer-show-answer:hover {
-    background-color: rgb(237, 112, 170);
-}
-
 .answer {
     padding: 7px 25px 7px 25px;
     border: none;
@@ -63,10 +47,22 @@ body {
     background-color: rgb(237, 112, 170);
 }
 
-.answer-reveal {
-    animation-name:reveal-animation;
+.hidden {
+    display: none;
 }
 
-.answer.hidden {
-    display: none;
+.loading {
+    position: absolute;
+    top: 500px;
+    border: 10px solid white; 
+    border-top: 10px solid rgb(237, 112, 170);; 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: loading-animation 1s linear infinite;
+}
+
+@keyframes loading-animation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -1,48 +1,47 @@
+// TODO: 
 const questions_div = document.querySelector('.questions');  // all newDivs goes here
+const loadingAnimation = document.querySelector('.loading');  
 //const answerButton = document.createElement('button');
 //const answerButtonShowAnswer = document.createElement('button');
 //const allShowAnswerButtons = useData();
-let allShowAnswerButtons;
+//let allShowAnswerButtons;
 
 async function getData() {
     const response = await fetch('https://opentdb.com/api.php?amount=10&type=boolean');
     const data = await response.json();
-    useData(data);
+    //useData(data);
+    return data;
+    
 }
 
 function useData(data) {
     // loop trought all questions and answers
-
+    
     for(let i = 0; i < data.results.length; i++) {  
         const newDiv = document.createElement('div');
         const question_p = document.createElement('p');
         const answerButton = document.createElement('button');
-        const answerButtonShowAnswer = document.createElement('button');
         newDiv.appendChild(question_p);
         newDiv.appendChild(answerButton);
         questions_div.appendChild(newDiv);
-        newDiv.appendChild(answerButtonShowAnswer);
-        answerButtonShowAnswer.innerHTML = 'Show answer';
-        answerButtonShowAnswer.classList.add('answer-show-answer');
         question_p.innerHTML = data.results[i].question;
         answerButton.innerHTML = data.results[i].correct_answer;
         //answerButton.innerHTML = 'Show answer';
         newDiv.classList.add('question');
         answerButton.classList.add('answer');
-        answerButton.classList.add('hidden');
+        //answerButton.classList.add('hidden');
+        newDiv.classList.add('question');
     }
-    let allShowAnswerButtons = document.querySelectorAll('.answer-show-answer');
+    loadingAnimation.classList.add('hidden');
     //getButtons(allShowAnswerButtons);
     //console.log(allShowAnswerButtons);
-    allShowAnswerButtons.forEach(function(btn) {
+    /*allShowAnswerButtons.forEach(function(btn) {
         btn.addEventListener('click', () => {
-            console.log('clicked');
-    })});
+            answerButtonShowAnswer.classList.add('hidden');
+    })});*/
 }
 
-function getButtons(buttons) {
-    return buttons;
-}
+
 /*
 //allShowAnswerButtons = getButtons();
 //console.log(allShowAnswerButtons);
@@ -59,7 +58,11 @@ answerButtonShowAnswer.forEach(function(btn) {
 */
 
 
-getData();
+// main
+const triviaData = getData();
+triviaData.then(function(triviaData) {
+    useData(triviaData);
+});
 
 
 
