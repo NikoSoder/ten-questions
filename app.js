@@ -1,12 +1,18 @@
 const questions_div = document.querySelector('.questions');  // all newDivs goes here
 const loadingAnimation = document.querySelector('.loading');
 const showAnswerButton = document.getElementById('btn');
-let allAnswerButtons = [];
+const API_URL = 'https://opentdb.com/api.php?amount=10&type=boolean';
+let AllAnswer_p = [];  // all answer_p elements 
 
 async function getData() {
-    const response = await fetch('https://opentdb.com/api.php?amount=10&type=boolean');
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        return data;
+    
+    } catch (error) {
+        alert('Failed to get the data. Refresh the page');
+    }
 }
 
 function useData(data) {
@@ -15,21 +21,20 @@ function useData(data) {
     for(let i = 0; i < data.results.length; i++) {  
         const newDiv = document.createElement('div');  // question_p and answerButton goes here
         const question_p = document.createElement('p');
-        const answerButton = document.createElement('button');
+        const answer_p = document.createElement('p');
         
         newDiv.appendChild(question_p);   // append elements to elements
-        newDiv.appendChild(answerButton);
+        newDiv.appendChild(answer_p);
         questions_div.appendChild(newDiv);
         
         question_p.innerHTML = data.results[i].question;
-        answerButton.innerHTML = data.results[i].correct_answer;
+        answer_p.innerHTML = data.results[i].correct_answer;
         
         newDiv.classList.add('question');     // add classes to elements
-        answerButton.classList.add('answer');
-        answerButton.classList.add('hidden');
-        newDiv.classList.add('question');
+        answer_p.classList.add('answer');
+        answer_p.classList.add('hidden');
         
-        allAnswerButtons.push(answerButton);  // push answers to the list
+        AllAnswer_p.push(answer_p);  // push answers to the list
     }
     
     loadingAnimation.classList.add('hidden');  // hide loading animation when data is displayed
@@ -37,7 +42,7 @@ function useData(data) {
 
 // when user click show answer button remove 'hidden' class from answers 
 showAnswerButton.addEventListener('click', () => {
-    allAnswerButtons.forEach(function(btn) {
+    AllAnswer_p.forEach(function(btn) {
         btn.classList.remove('hidden');
     })
 });
