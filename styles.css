@@ -11,6 +11,21 @@ body {
     flex-direction: column;
 }
 
+.introduction {
+    animation: introduction-animation 3s ease-in-out forwards;
+}
+
+@keyframes introduction-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
 .questions {
     margin: 20px 20px 40px 20px;
     border-radius: 10px;
@@ -35,6 +50,17 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    animation-name: page-animation;
+    animation-duration: 2s;
+    animation-delay: 1000ms;
+    animation-timing-function: ease-in;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+@keyframes page-animation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .answer {
@@ -43,20 +69,14 @@ body {
     border: none;
     background-color: rgb(238,174,202);
     font-size: 20px;
-    animation-name: answer-animation;
+    animation-name: page-animation;
     animation-duration: 2s;
     animation-fill-mode: forwards;
 }
 
-@keyframes answer-animation {
-    0% {
-        opacity: 0;
-
-    }
-    100% {
-        opacity: 1;
-    }
-
+@keyframes page-animation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .hidden {

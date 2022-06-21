@@ -1,4 +1,3 @@
-// TODO: add .catch // add animation  // change buttons to divs
 const questions_div = document.querySelector('.questions');  // all newDivs goes here
 const loadingAnimation = document.querySelector('.loading');
 const showAnswerButton = document.getElementById('btn');
@@ -34,7 +33,6 @@ function useData(data) {
         newDiv.classList.add('question');     // add classes to elements
         answer_p.classList.add('answer');
         answer_p.classList.add('hidden');
-        newDiv.classList.add('question');
         
         AllAnswer_p.push(answer_p);  // push answers to the list
     }
